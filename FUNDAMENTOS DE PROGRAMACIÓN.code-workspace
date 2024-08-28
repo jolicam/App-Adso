@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "../../FUNDAMENTOS DE PROGRAMACIÓN"
+		},
+		{
+			"path": "../../PROJECT-1"
+		},
+		{
+			"path": "../../TRABAJO EN GRUPO"
+		},
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../PROYECTO ADSO FINAL PRUEBA"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "TRABAJO EN GRUPO"
+	}
+}
