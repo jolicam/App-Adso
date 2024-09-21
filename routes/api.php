@@ -3,7 +3,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\EspecialidadController;
+use App\Http\Controllers\EspecialidadesController;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\MecanicoController;
 use App\Http\Controllers\ServicioController;
@@ -27,42 +27,42 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/cliente/getData', [ClienteController::class, 'getData']);
 Route::post('/cliente/save', [ClienteController::class, 'save']);
-Route::put('/cliente/Update', [ClienteController::class, 'Update']);
+Route::put('cliente/update', [ClienteController::class, 'update']);
 Route::delete('/cliente/delete', [ClienteController::class, 'delete']);
 
-Route::get('/especialidad/getData', [especialidadController::class, 'getData']);
-Route::post('/especialidad/save', [especialidadController::class, 'save']);
-Route::put('/especialidad/Update', [especialidadController::class, 'Update']);
-Route::delete('/especialidad/delete', [especialidadController::class, 'delete']);
+Route::get('/especialidad/getData', [EspecialidadesController::class, 'getData']);
+Route::post('/especialidad/save', [EspecialidadesController::class, 'save']);
+Route::put('/especialidad/update', [EspecialidadesController::class, 'update']);
+Route::delete('/especialidad/delete', [EspecialidadesController::class, 'delete']);
 
 Route::get('/vehiculo/getData', [vehiculoController::class, 'getData']);
 Route::post('/vehiculo/save', [vehiculoController::class, 'save']);
-Route::put('/vehiculo/Update', [vehiculoController::class, 'Update']);
+Route::put('/vehiculo/update', [vehiculoController::class, 'update']);
 Route::delete('/vehiculo/delete', [vehiculoController::class, 'delete']);
 
 Route::get('/mecanico/getData', [mecanicoController::class, 'getData']);
 Route::post('/mecanico/save', [mecanicoController::class, 'save']);
-Route::put('/mecanico/Update', [mecanicoController::class, 'Update']);
+Route::put('/mecanico/update', [mecanicoController::class, 'update']);
 Route::delete('/mecanico/delete', [mecanicoController::class, 'delete']);
 
 Route::get('/servicio/getData', [servicioController::class, 'getData']);
 Route::post('/servicio/save', [servicioController::class, 'save']);
-Route::put('/servicio/Update', [servicioController::class, 'Update']);
+Route::put('/servicio/update', [servicioController::class, 'update']);
 Route::delete('/servicio/delete', [servicioController::class, 'delete']);
 
 Route::get('/repuesto/getData', [repuestoController::class, 'getData']);
 Route::post('/repuesto/save', [repuestoController::class, 'save']);
-Route::put('/repuesto/Update', [repuestoController::class, 'Update']);
+Route::put('/repuesto/update', [repuestoController::class, 'update']);
 Route::delete('/repuesto/delete', [repuestoController::class, 'delete']);
 
 Route::get('/serviciomecanico/getData', [serviciomecanicoController::class, 'getData']);
 Route::post('/serviciomecanico/save', [serviciomecanicoController::class, 'save']);
-Route::put('/serviciomecanico/Update', [serviciomecanicoController::class, 'Update']);
+Route::put('/serviciomecanico/update', [serviciomecanicoController::class, 'update']);
 Route::delete('/serviciomecanico/delete', [serviciomecanicoController::class, 'delete']);
 
 Route::get('/factura/getData', [facturaController::class, 'getData']);
 Route::post('/factura/save', [facturaController::class, 'save']);
-Route::put('/factura/Update', [facturaController::class, 'Update']);
+Route::put('/factura/update', [facturaController::class, 'update']);
 Route::delete('/factura/delete', [facturaController::class, 'delete']);
 
 // Route::cotroller(AutoController::class)->group(function () {
