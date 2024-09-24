@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Especialidad extends Model
+class Especialidades extends Model
 {
     use HasFactory;
+    
+    protected $fillable=['Nombre_especialidades'];
 }

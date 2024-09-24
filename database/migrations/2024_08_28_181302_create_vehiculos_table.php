@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('placa')->unique();  
             $table->string('marca');
             $table->string('modelo');
-            $table->year('año');  
+            $table->integer('año');  
 
             // $table->unsignedBigInteger('cliente_id');
             $table->unsignedBigInteger('cliente_id');
