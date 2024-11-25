@@ -8,10 +8,9 @@ use App\Models\Vehiculo;
 
 class VehiculoController extends Controller
 {
-    //
-
-    public function  getData (Request $request) {
-
+    
+    public function getData(Request $request)
+    {
         $vehiculos = Vehiculo::all();  
         
         return response()->json([
@@ -19,57 +18,67 @@ class VehiculoController extends Controller
             'message' => 'Data retrieved successfully',
             'result' => $vehiculos,
         ]);
+    }
 
+    
+    public function getDataById(Request $request)
+    {
+        $vehiculo = Vehiculo::where('id', $request->id)->get();
 
         return response()->json([
             'status' => '200',
-            'message' => 'Data ...',
+            'message' => 'Data retrieved successfully',
             'result' => $vehiculo,
         ]);
-
     }
-    public function  save(Request $request) {
-       
+
+    
+    public function save(Request $request)
+    {
         $vehiculo = Vehiculo::create([
             'placa' => $request->placa,
             'marca' => $request->marca,
             'modelo' => $request->modelo,
             'año' => $request->año,
             'cliente_id' => $request->cliente_id,
-        ]); 
-    
+        ]);
+
         return response()->json([
             'status' => '200',
             'message' => 'Guardado con éxito',
-            'data' => $request->placa,
+            'data' => $vehiculo,
         ]);
-}
-public function  Update(Request $request) {
-    $vehiculo = Vehiculo::findOrFail($request->id);
+    }
 
-    $vehiculo->update([
-        'placa' => $request->placa,
-        'marca' => $request->marca,
-        'modelo' => $request->modelo,
-        'año' => $request->año,
-        'cliente_id' => $request->cliente_id,
-    ]);
-        
-    return response()->json([
-        'status' => '200',
-        'message' => 'Guardado con éxito',
-        'data' => $vehiculo,
-    ]);
+    
+    public function update(Request $request)
+    {
+        $vehiculo = Vehiculo::findOrFail($request->id);
 
-}
-public function  Delete(Request $request) {
+        $vehiculo->update([
+            'placa' => $request->placa,
+            'marca' => $request->marca,
+            'modelo' => $request->modelo,
+            'año' => $request->año,
+            'cliente_id' => $request->cliente_id,
+        ]);
 
-    $vehiculo = Vehiculo::findOrFail($request->id);
-    $vehiculo->delete();
-        
-    return response()->json([
-        'status' => '200',
-        'message' => 'Guardado con éxito',
-    ]);
-}
+        return response()->json([
+            'status' => '200',
+            'message' => 'Actualizado con éxito',
+            'data' => $vehiculo,
+        ]);
+    }
+
+    
+    public function delete(Request $request)
+    {
+        $vehiculo = Vehiculo::findOrFail($request->id);
+        $vehiculo->delete();
+
+        return response()->json([
+            'status' => '200',
+            'message' => 'Eliminado con éxito',
+        ]);
+    }
 }

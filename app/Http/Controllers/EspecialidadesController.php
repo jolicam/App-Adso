@@ -4,67 +4,72 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\models\Especialidades;
+use App\Models\Especialidades;
 
 class EspecialidadesController extends Controller
 {
-    //
+    // Obtener todas las especialidades
+    public function getData(Request $request)
+    {
+        $especialidades = Especialidades::all();
 
-    public function  getData (Request $request) {
-
-        $especialidad = Especialidades::all();  
-        
         return response()->json([
             'status' => '200',
-            'message' => 'Data retrieved successfully',
+            'message' => 'data..',
+            'result' => $especialidades,
+        ]);
+    }
+
+    // Obtener una especialidad por ID
+    public function getDataById(Request $request)
+    {
+        $especialidad = Especialidades::where('id', $request->id)->get();
+
+        return response()->json([
+            'status' => '200',
+            'message' => 'data..',
             'result' => $especialidad,
         ]);
     }
-    public function  save(Request $request) {
-      
-        $especialidad=Especialidades::create([
-            'Nombre_especialidades'=>$request->Nombre_especialidades,
-            
+
+    // Guardar una especialidad
+    public function save(Request $request)
+    {
+        $especialidad = Especialidades::create([
+            'Nombre_especialidades' => $request->Nombre_especialidades,
         ]);
-
-
-        // $especialidad = new Especialidad();
-        // $especialidad->Nombre_especialidades = $request->Nombre_especialidades; 
-        // $especialidad->save();
-       
 
         return response()->json([
             'status' => '200',
-            'message' => 'Guardado con éxito',
-            'data'=> $request->Nombre_especialidades, 
+            'message' => 'guardado con éxito',
+            'data' => $especialidad,
+        ]);
+    }
+
+    // Actualizar una especialidad
+    public function update(Request $request)
+    {
+        $especialidad = Especialidades::findOrFail($request->id);
+
+        $especialidad->update([
+            'Nombre_especialidades' => $request->Nombre_especialidades,
         ]);
 
-}
+        return response()->json([
+            'status' => '200',
+            'message' => 'actualizado con éxito',
+        ]);
+    }
 
-public function  update(Request $request) {
+    // Eliminar una especialidad
+    public function delete(Request $request)
+    {
+        $especialidad = Especialidades::findOrFail($request->id);
+        $especialidad->delete();
 
-    $especialidad=Especialidades::findOrFail($request->id);
-
-    $especialidad->update([
-        'Nombre_especialidades' => $request->Nombre_especialidades,
-    ]);
-
-
-    return response()->json([
-        'status' => '200',
-        'message' => 'Guardado con éxito',
-    ]);
-
-}
-public function  Delete(Request $request) {
-
-    $especialidad = Especialidades::findOrFail($request->id);
-    $especialidad->delete();
-        
-    return response()->json([
-        'status' => '200',
-        'message' => 'Guardado con éxito',
-
-    ]);
-}
+        return response()->json([
+            'status' => '200',
+            'message' => 'se eliminó con éxito',
+        ]);
+    }
 }

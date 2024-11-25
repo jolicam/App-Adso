@@ -12,27 +12,30 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('servicio_mecanicos', function (Blueprint $table) {
-            $table->id();
-            
-            //$table->unsignedBigInteger('servicio_id');
-            $table->unsignedBigInteger('servicio_id'); // Clave foránea para el servicio
+            $table->id(); // ID principal
 
-            //$table->unsignedBigInteger('mecanico_id');
-            $table->unsignedBigInteger('mecanico_id');  // Clave foránea para el mecánico
+            // Clave foránea para servicios
+            $table->unsignedBigInteger('servicio_id');
+            $table->foreign('servicio_id')
+                  ->references('id')
+                  ->on('servicios')
+                  ->onDelete('cascade');
 
-            // $table->unsignedBigInteger('repuesto_id');
-            $table->unsignedBigInteger('repuesto_id');  // Clave foránea para el repuesto
+            // Clave foránea para mecánicos
+            $table->unsignedBigInteger('mecanico_id');
+            $table->foreign('mecanico_id')
+                  ->references('id')
+                  ->on('mecanicos')
+                  ->onDelete('cascade');
 
-            //$table->foreign('servicio_id')->references('id')->on('servicios')->onDelete('cascade');
-            $table->foreign('servicio_id')->references('id')->on('servicios')->onDelete('cascade');
+            // Clave foránea para repuestos
+            $table->unsignedBigInteger('repuesto_id');
+            $table->foreign('repuesto_id')
+                  ->references('id')
+                  ->on('repuestos')
+                  ->onDelete('cascade');
 
-            //$table->foreign('mecanico_id')->references('id')->on('mecanicos')->onDelete('cascade')
-            $table->foreign('mecanico_id')->references('id')->on('mecanicos')->onDelete('cascade');
-            
-            //$table->foreign('repuesto_id')->references('id')->on('repuestos')->onDelete('cascade');
-            $table->foreign('repuesto_id')->references('id')->on('repuestos')->onDelete('cascade');
-
-            $table->timestamps();
+            $table->timestamps(); // Marca de tiempo
         });
     }
 

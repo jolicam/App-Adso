@@ -9,5 +9,5 @@ class Repuesto extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre','precio'];
+    protected $fillable = ['nombre', 'precio'];
 }

@@ -12,21 +12,26 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('servicios', function (Blueprint $table) {
-            $table->id();
-            $table->string('descripcion');
-            $table->decimal('costo', 8, 2);  
-            $table->date('fecha');  
-            $table->string('vehiculo_placa');  
+            $table->id(); // ID principal
+            $table->string('descripcion'); // Descripción del servicio
+            $table->decimal('costo', 8, 2); // Costo del servicio
+            $table->date('fecha'); // Fecha del servicio
 
-            // $table->unsignedBigInteger('mecanico_id');
+            // Clave foránea para vehículos
+            $table->string('vehiculo_placa'); 
+            $table->foreign('vehiculo_placa')
+                  ->references('placa')
+                  ->on('vehiculos')
+                  ->onDelete('cascade');
+
+            // Clave foránea para mecánicos
             $table->unsignedBigInteger('mecanico_id');
+            $table->foreign('mecanico_id')
+                  ->references('id')
+                  ->on('mecanicos')
+                  ->onDelete('cascade');
 
-            // $table->foreign('vehiculo_placa')->references('placa')->on('vehiculos')->onDelete('cascade');
-            $table->foreign('vehiculo_placa')->references('placa')->on('vehiculos')->onDelete('cascade');
-            //$table->foreign('mecanico_id')->references('id')->on('mecanicos')->onDelete('cascade');
-            $table->foreign('mecanico_id')->references('id')->on('mecanicos')->onDelete('cascade');
-            
-            $table->timestamps();
+            $table->timestamps(); // Marca de tiempo
         });
     }
 

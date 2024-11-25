@@ -12,23 +12,22 @@ return new class extends Migration
     public function up(): void
     {
         
-        if (!Schema::hasTable('mecanicos')) {
-            Schema::create('mecanicos', function (Blueprint $table) {
-                $table->id();
-                $table->string('nombre');
-                $table->string('apellido');
-                $table->string('documento');
-                $table->string('telefono');
-                $table->unsignedBigInteger('especialidad_id'); 
+        Schema::create('mecanicos', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre');
+            $table->string('apellido');
+            $table->string('documento');
+            $table->string('telefono');
+            $table->unsignedBigInteger('especialidad_id'); // Relación con especialidades
 
-                // Definición de clave foránea
-                $table->foreign('especialidad_id')
-                      ->references('id')
-                      ->on('especialidades')
-                      ->onDelete('cascade');
-                $table->timestamps();
-            });
-        }
+            // Definimos la clave foránea para 'especialidad_id'
+            $table->foreign('especialidad_id')
+                  ->references('id')
+                  ->on('especialidades')
+                  ->onDelete('cascade');
+
+            $table->timestamps(); 
+        });
     }
 
     /**

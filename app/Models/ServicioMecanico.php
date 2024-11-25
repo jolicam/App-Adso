@@ -9,5 +9,5 @@ class ServicioMecanico extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'servicio_id','mecanico_id','repuesto_id' ];
+    protected $fillable = ['servicio_id', 'mecanico_id', 'repuesto_id'];
 }

@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('apellido');
-            $table->string('Identificacion');
+            $table->string('identificacion');  // Ajustado para no usar mayúsculas innecesarias
             $table->string('telefono');
-            $table->string('correo_electronico')->unique();
-            $table->timestamps();
+            $table->string('correo_electronico')->unique(); // Correo electrónico debe ser único
+            $table->timestamps(); // Guarda las marcas de tiempo (created_at, updated_at)
         });
     }
 

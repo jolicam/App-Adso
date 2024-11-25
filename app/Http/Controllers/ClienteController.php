@@ -8,75 +8,76 @@ use App\Models\Cliente;
 
 class ClienteController extends Controller
 {
-    
+    // Obtener todos los clientes
+    public function getData(Request $request)
+    {
+        $clientes = Cliente::all();
 
-    public function  getData (Request $request) {
-
-        $clientes = Cliente::all();  
-        
         return response()->json([
             'status' => '200',
-            'message' => 'Data ...',
+            'message' => 'data..',
             'result' => $clientes,
         ]);
+    }
 
+    // Obtener un cliente por ID
+    public function getDataById(Request $request)
+    {
+        $cliente = Cliente::where('id', $request->id)->get();
 
         return response()->json([
             'status' => '200',
-            'message' => 'Data ...',
+            'message' => 'data..',
             'result' => $cliente,
         ]);
-
     }
-    public function  save(Request $request) {
 
-
+    // Guardar un cliente
+    public function save(Request $request)
+    {
         $cliente = Cliente::create([
             'nombre' => $request->nombre,
             'apellido' => $request->apellido,
-            'Identificacion' => $request->identificacion,
+            'identificacion' => $request->identificacion,
             'telefono' => $request->telefono,
             'correo_electronico' => $request->correo_electronico,
         ]);
-      
 
         return response()->json([
             'status' => '200',
-            'message' => 'Guardado con éxito',
-            'data'=>$request->nombre,
+            'message' => 'guardado con éxito',
+            'data' => $cliente,
         ]);
-    
-}
+    }
 
-public function  update(Request $request) {
+    // Actualizar un cliente
+    public function update(Request $request)
+    {
+        $cliente = Cliente::findOrFail($request->id);
 
-    $cliente=Cliente::findOrFail($request->id);
-    
-    $cliente->update([
-        'nombre' => $request->nombre,
-        'apellido' => $request->apellido,
-        'Identificacion' => $request->identificacion,
-        'telefono' => $request->telefono,
-        'correo_electronico' => $request->correo_electronico,
+        $cliente->update([
+            'nombre' => $request->nombre,
+            'apellido' => $request->apellido,
+            'identificacion' => $request->identificacion,
+            'telefono' => $request->telefono,
+            'correo_electronico' => $request->correo_electronico,
+        ]);
 
-    ]);
+        return response()->json([
+            'status' => '200',
+            'message' => 'actualizado con éxito',
+        ]);
+    }
 
-    return response()->json([
-        'status' => '200',
-        'message' => 'Guardado con éxito',
-        'result' => $cliente,   
-    ]);
+    // Eliminar un cliente
+    public function delete(Request $request)
+    {
+        $cliente = Cliente::findOrFail($request->id);
+        $cliente->delete();
 
-}
-public function  Delete(Request $request) {
-
-    $cliente = cliente::findOrFail($request->id);
-    $cliente->delete();
-        
-
-    return response()->json([
-        'status' => '200',
-        'message' => 'Guardado con éxito',
-    ]);
-}
+        return response()->json([
+            'status' => '200',
+            'message' => 'se eliminó con éxito',
+        ]);
+    }
 }

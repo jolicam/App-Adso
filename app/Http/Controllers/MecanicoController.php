@@ -8,27 +8,33 @@ use App\Models\Mecanico;
 
 class MecanicoController extends Controller
 {
-    //
+    // Obtener todos los mecánicos
+    public function getData(Request $request)
+    {
+        $mecanicos = Mecanico::all();
 
-    public function  getData (Request $request) {
-
-        $mecanicos = Mecanico::all();  
-        
         return response()->json([
             'status' => '200',
-            'message' => 'Data retrieved successfully',
+            'message' => 'data..', // Mensaje similar al de CargoController
             'result' => $mecanicos,
         ]);
+    }
+
+    // Obtener un mecánico por ID
+    public function getDataById(Request $request)
+    {
+        $mecanico = Mecanico::where('id', $request->id)->get();
 
         return response()->json([
             'status' => '200',
-            'message' => 'Data ...',
+            'message' => 'data..', // Consistente con el mensaje en getData
             'result' => $mecanico,
         ]);
-
     }
-    public function  save(Request $request) {
 
+    // Guardar un nuevo mecánico
+    public function save(Request $request)
+    {
         $mecanico = Mecanico::create([
             'nombre' => $request->nombre,
             'apellido' => $request->apellido,
@@ -36,19 +42,18 @@ class MecanicoController extends Controller
             'telefono' => $request->telefono,
             'especialidad_id' => $request->especialidad_id,
         ]);
-        
+
         return response()->json([
             'status' => '200',
-            'message' => 'Guardado con éxito',
-            'data'=> $request->nombre,
+            'message' => 'guardado con exito', // Mensaje consistente con CargoController
+            'data' => $mecanico, // Devolviendo el objeto creado
         ]);
-    
+    }
 
-
-}
-public function  Update(Request $request) {
-
-    $mecanico = Mecanico::findOrFail($request->id);
+    // Actualizar un mecánico existente
+    public function update(Request $request)
+    {
+        $mecanico = Mecanico::findOrFail($request->id);
 
         $mecanico->update([
             'nombre' => $request->nombre,
@@ -57,23 +62,22 @@ public function  Update(Request $request) {
             'telefono' => $request->telefono,
             'especialidad_id' => $request->especialidad_id,
         ]);
-        
-    return response()->json([
-        'status' => '200',
-        'message' => 'Guardado con éxito',
-        'data' => $mecanico,
-    ]);
 
-}
-public function  Delete(Request $request) {
+        return response()->json([
+            'status' => '200',
+            'message' => 'actualizado con exito', // Mensaje consistente con CargoController
+        ]);
+    }
 
-    $mecanico = Mecanico::findOrFail($request->id);
-    $mecanico->delete();
-        
-    return response()->json([
-        'status' => '200',
-        'message' => 'Guardado con éxito',
-    ]);
+    // Eliminar un mecánico
+    public function delete(Request $request)
+    {
+        $mecanico = Mecanico::findOrFail($request->id);
+        $mecanico->delete();
+
+        return response()->json([
+            'status' => '200',
+            'message' => 'Se elimino con exito', // Mensaje consistente con CargoController
+        ]);
+    }
 }
-}
-   
