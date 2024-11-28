@@ -12,18 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('vehiculos', function (Blueprint $table) {
-            $table->id();
-            $table->string('placa')->unique();  
-            $table->string('marca');
-            $table->string('modelo');
-            $table->year('año');  
+            $table->id(); // ID principal
+            $table->string('placa')->unique(); // Placa única del vehículo
+            $table->string('marca'); // Marca del vehículo
+            $table->string('modelo'); // Modelo del vehículo
+            $table->integer('año'); // Año del vehículo
 
-            // $table->unsignedBigInteger('cliente_id');
+            // Clave foránea para clientes
             $table->unsignedBigInteger('cliente_id');
+            $table->foreign('cliente_id')
+                  ->references('id')
+                  ->on('clientes')
+                  ->onDelete('cascade'); 
 
-            //$table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
-            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 

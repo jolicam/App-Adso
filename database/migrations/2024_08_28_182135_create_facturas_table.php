@@ -16,14 +16,13 @@ return new class extends Migration
             $table->date('fecha');  
             $table->decimal('total', 10, 2);  
 
-            //$table->unsignedBigInteger('cliente_id'); 
-            $table->unsignedBigInteger('cliente_id');  // Clave foránea para el cliente
-
-            //$table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
-            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
+            // Relación con la tabla clientes
+            $table->unsignedBigInteger('cliente_id'); 
 
             
-            $table->timestamps();
+            $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade');
+
+            $table->timestamps();  // Marca los registros de fecha de creación y actualización
         });
     }
 

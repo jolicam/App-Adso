@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('repuestos', function (Blueprint $table) {
-            $table->id();  
-            $table->string('nombre');  
-            $table->decimal('precio', 8, 2);  
+            $table->id(); // ID del repuesto
+            $table->string('nombre'); // Nombre del repuesto
+            $table->decimal('precio', 8, 2); // Precio con formato decimal
             $table->timestamps();
         });
     }

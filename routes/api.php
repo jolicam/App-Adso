@@ -1,74 +1,107 @@
 <?php
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\EspecialidadController;
+use App\Http\Controllers\EspecialidadesController;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\MecanicoController;
 use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\RepuestoController;
 use App\Http\Controllers\ServiciomecanicoController;
 use App\Http\Controllers\FacturaController;
+
 /*
 |--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
+// Las demás rutas
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Agrupación de rutas para ClienteController
+Route::controller(ClienteController::class)->group(function () {
+    Route::get('/cliente/getData', 'getData');
+    Route::get('/cliente/getDataById', 'getDataById');  
+    Route::post('/cliente/save', 'save');
+    Route::put('/cliente/update', 'update');
+    Route::delete('/cliente/delete', 'delete');
 });
 
-Route::get('/cliente/getData', [ClienteController::class, 'getData']);
-Route::post('/cliente/save', [ClienteController::class, 'save']);
-Route::put('/cliente/Update', [ClienteController::class, 'Update']);
-Route::delete('/cliente/delete', [ClienteController::class, 'delete']);
 
-Route::get('/especialidad/getData', [especialidadController::class, 'getData']);
-Route::post('/especialidad/save', [especialidadController::class, 'save']);
-Route::put('/especialidad/Update', [especialidadController::class, 'Update']);
-Route::delete('/especialidad/delete', [especialidadController::class, 'delete']);
 
-Route::get('/vehiculo/getData', [vehiculoController::class, 'getData']);
-Route::post('/vehiculo/save', [vehiculoController::class, 'save']);
-Route::put('/vehiculo/Update', [vehiculoController::class, 'Update']);
-Route::delete('/vehiculo/delete', [vehiculoController::class, 'delete']);
+Route::controller(EspecialidadesController::class)->group(function () {
+    Route::get('/especialidad/datos', 'getData');  // Obtener todas las especialidades
+    //se quita ese parametro en la ruta por que en el controlador lo esta esperando en el request
+    //si se deja de esta manera toca agregar el id en el controlador por parametro y cambiar la instruccion de where por find
+    //yo lo quitaria.. y con rabia jeje
+    Route::get('/especialidad', 'getDataById');  // Obtener especialidad por ID
+    Route::post('/especialidad/save', 'save');  // Guardar especialidad
+    Route::put('/especialidad/update', 'update');  // Actualizar especialidad
+    Route::delete('/especialidad/eliminar/{id}', 'delete');  // Eliminar especialidad
 
-Route::get('/mecanico/getData', [mecanicoController::class, 'getData']);
-Route::post('/mecanico/save', [mecanicoController::class, 'save']);
-Route::put('/mecanico/Update', [mecanicoController::class, 'Update']);
-Route::delete('/mecanico/delete', [mecanicoController::class, 'delete']);
 
-Route::get('/servicio/getData', [servicioController::class, 'getData']);
-Route::post('/servicio/save', [servicioController::class, 'save']);
-Route::put('/servicio/Update', [servicioController::class, 'Update']);
-Route::delete('/servicio/delete', [servicioController::class, 'delete']);
+});
 
-Route::get('/repuesto/getData', [repuestoController::class, 'getData']);
-Route::post('/repuesto/save', [repuestoController::class, 'save']);
-Route::put('/repuesto/Update', [repuestoController::class, 'Update']);
-Route::delete('/repuesto/delete', [repuestoController::class, 'delete']);
+// Agrupación de rutas para VehiculoController
+Route::controller(VehiculoController::class)->group(function () {
+    Route::get('/vehiculo/getData', 'getData');
+    Route::get('/vehiculo/getDataById/', 'getDataById');  
+    Route::post('/vehiculo/save', 'save');
+    Route::put('/vehiculo/update', 'update');
+    Route::delete('/vehiculo/delete', 'delete');
+});
 
-Route::get('/serviciomecanico/getData', [serviciomecanicoController::class, 'getData']);
-Route::post('/serviciomecanico/save', [serviciomecanicoController::class, 'save']);
-Route::put('/serviciomecanico/Update', [serviciomecanicoController::class, 'Update']);
-Route::delete('/serviciomecanico/delete', [serviciomecanicoController::class, 'delete']);
+// Agrupación de rutas para MecanicoController
+Route::controller(MecanicoController::class)->group(function () {
+    Route::get('/mecanico/getData', 'getData');
+    //queddaria asi la ruta sin ese parametro
+    Route::get('/mecanico/getDataById', 'getDataById');  
+    Route::post('/mecanico/save', 'save');
+    Route::put('/mecanico/update', 'update');
+    Route::delete('/mecanico/delete', 'delete');
+});
 
-Route::get('/factura/getData', [facturaController::class, 'getData']);
-Route::post('/factura/save', [facturaController::class, 'save']);
-Route::put('/factura/Update', [facturaController::class, 'Update']);
-Route::delete('/factura/delete', [facturaController::class, 'delete']);
+// Agrupación de rutas para ServicioController
+Route::controller(ServicioController::class)->group(function () {
+    Route::get('/servicio/getData', 'getData');
+    Route::get('/servicio/getDataById/{id}', 'getDataById');  
+    Route::post('/servicio/save', 'save');
+    Route::put('/servicio/update', 'update');
+    Route::delete('/servicio/delete', 'delete');
+});
 
-// Route::cotroller(AutoController::class)->group(function () {
+// Agrupación de rutas para RepuestoController
+Route::controller(RepuestoController::class)->group(function () {
+    Route::get('/repuesto/getData', 'getData');
+    Route::get('/repuesto/getDataById/{id}', 'getDataById');  
+    Route::post('/repuesto/save', 'save');
+    Route::put('/repuesto/update', 'update');
+    Route::delete('/repuesto/delete', 'delete');
+});
+
+// Agrupación de rutas para ServiciomecanicoController
+Route::controller(ServiciomecanicoController::class)->group(function () {
+    Route::get('/serviciomecanico/getData', 'getData');
+    Route::get('/serviciomecanico/getDataById/{id}', 'getDataById');  
+    Route::post('/serviciomecanico/save', 'save');
+    Route::put('/serviciomecanico/update', 'update');
+    Route::delete('/serviciomecanico/delete', 'delete');
+});
+
+// Agrupación de rutas para FacturaController
+Route::controller(FacturaController::class)->group(function () {
+    Route::get('/factura/getData', 'getData');
+    Route::get('/factura/getDataById/{id}', 'getDataById');  
+    Route::post('/factura/save', 'save');
+    Route::put('/factura/update', 'update');
+    Route::delete('/factura/delete', 'delete');
+});
+
+// Ejemplo para rutas de autenticación
+// Route::controller(AuthController::class)->group(function () {
 //     Route::post('login', 'login');
 //     Route::post('register', 'register');
 //     Route::post('logout', 'logout');
 //     Route::post('refresh', 'refresh');
-//     Route::post('me', 'me');
+//     Route::get('me', 'me');
 // });
+
