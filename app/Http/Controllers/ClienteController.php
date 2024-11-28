@@ -38,7 +38,7 @@ class ClienteController extends Controller
         $cliente = Cliente::create([
             'nombre' => $request->nombre,
             'apellido' => $request->apellido,
-            'identificacion' => $request->identificacion,
+            'Identificacion' => $request->identificacion,
             'telefono' => $request->telefono,
             'correo_electronico' => $request->correo_electronico,
         ]);

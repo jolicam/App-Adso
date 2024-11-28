@@ -20,25 +20,31 @@ use App\Http\Controllers\FacturaController;
 // Agrupación de rutas para ClienteController
 Route::controller(ClienteController::class)->group(function () {
     Route::get('/cliente/getData', 'getData');
-    Route::get('/cliente/getDataById/{id}', 'getDataById');  // Ruta agregada para obtener un cliente por ID
+    Route::get('/cliente/getDataById', 'getDataById');  
     Route::post('/cliente/save', 'save');
     Route::put('/cliente/update', 'update');
     Route::delete('/cliente/delete', 'delete');
 });
 
-// Agrupación de rutas para EspecialidadesController
+
+
 Route::controller(EspecialidadesController::class)->group(function () {
-    Route::get('/especialidad/getData', 'getData');
-    Route::get('/especialidad/getDataById/{id}', 'getDataById');  // Ruta agregada para obtener especialidad por ID
-    Route::post('/especialidad/save', 'save');
-    Route::put('/especialidad/update', 'update');
-    Route::delete('/especialidad/delete', 'delete');
+    Route::get('/especialidad/datos', 'getData');  // Obtener todas las especialidades
+    //se quita ese parametro en la ruta por que en el controlador lo esta esperando en el request
+    //si se deja de esta manera toca agregar el id en el controlador por parametro y cambiar la instruccion de where por find
+    //yo lo quitaria.. y con rabia jeje
+    Route::get('/especialidad', 'getDataById');  // Obtener especialidad por ID
+    Route::post('/especialidad/save', 'save');  // Guardar especialidad
+    Route::put('/especialidad/update', 'update');  // Actualizar especialidad
+    Route::delete('/especialidad/eliminar/{id}', 'delete');  // Eliminar especialidad
+
+
 });
 
 // Agrupación de rutas para VehiculoController
 Route::controller(VehiculoController::class)->group(function () {
     Route::get('/vehiculo/getData', 'getData');
-    Route::get('/vehiculo/getDataById/{id}', 'getDataById');  // Ruta agregada para obtener vehículo por ID
+    Route::get('/vehiculo/getDataById/', 'getDataById');  
     Route::post('/vehiculo/save', 'save');
     Route::put('/vehiculo/update', 'update');
     Route::delete('/vehiculo/delete', 'delete');
@@ -47,7 +53,8 @@ Route::controller(VehiculoController::class)->group(function () {
 // Agrupación de rutas para MecanicoController
 Route::controller(MecanicoController::class)->group(function () {
     Route::get('/mecanico/getData', 'getData');
-    Route::get('/mecanico/getDataById/{id}', 'getDataById');  // Ruta agregada para obtener mecánico por ID
+    //queddaria asi la ruta sin ese parametro
+    Route::get('/mecanico/getDataById', 'getDataById');  
     Route::post('/mecanico/save', 'save');
     Route::put('/mecanico/update', 'update');
     Route::delete('/mecanico/delete', 'delete');
@@ -56,7 +63,7 @@ Route::controller(MecanicoController::class)->group(function () {
 // Agrupación de rutas para ServicioController
 Route::controller(ServicioController::class)->group(function () {
     Route::get('/servicio/getData', 'getData');
-    Route::get('/servicio/getDataById/{id}', 'getDataById');  // Ruta agregada para obtener servicio por ID
+    Route::get('/servicio/getDataById/{id}', 'getDataById');  
     Route::post('/servicio/save', 'save');
     Route::put('/servicio/update', 'update');
     Route::delete('/servicio/delete', 'delete');
@@ -65,7 +72,7 @@ Route::controller(ServicioController::class)->group(function () {
 // Agrupación de rutas para RepuestoController
 Route::controller(RepuestoController::class)->group(function () {
     Route::get('/repuesto/getData', 'getData');
-    Route::get('/repuesto/getDataById/{id}', 'getDataById');  // Ruta agregada para obtener repuesto por ID
+    Route::get('/repuesto/getDataById/{id}', 'getDataById');  
     Route::post('/repuesto/save', 'save');
     Route::put('/repuesto/update', 'update');
     Route::delete('/repuesto/delete', 'delete');
@@ -74,7 +81,7 @@ Route::controller(RepuestoController::class)->group(function () {
 // Agrupación de rutas para ServiciomecanicoController
 Route::controller(ServiciomecanicoController::class)->group(function () {
     Route::get('/serviciomecanico/getData', 'getData');
-    Route::get('/serviciomecanico/getDataById/{id}', 'getDataById');  // Ruta agregada para obtener serviciomecánico por ID
+    Route::get('/serviciomecanico/getDataById/{id}', 'getDataById');  
     Route::post('/serviciomecanico/save', 'save');
     Route::put('/serviciomecanico/update', 'update');
     Route::delete('/serviciomecanico/delete', 'delete');
@@ -83,7 +90,7 @@ Route::controller(ServiciomecanicoController::class)->group(function () {
 // Agrupación de rutas para FacturaController
 Route::controller(FacturaController::class)->group(function () {
     Route::get('/factura/getData', 'getData');
-    Route::get('/factura/getDataById/{id}', 'getDataById');  // Ruta agregada para obtener factura por ID
+    Route::get('/factura/getDataById/{id}', 'getDataById');  
     Route::post('/factura/save', 'save');
     Route::put('/factura/update', 'update');
     Route::delete('/factura/delete', 'delete');

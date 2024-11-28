@@ -15,49 +15,50 @@ class EspecialidadesController extends Controller
 
         return response()->json([
             'status' => '200',
-            'message' => 'data..',
-            'result' => $especialidades,
+            'message' => 'Datos obtenidos con éxito',
+            'result' => $especialidades
         ]);
     }
 
     // Obtener una especialidad por ID
     public function getDataById(Request $request)
     {
+        //asi esta perfecto
         $especialidad = Especialidades::where('id', $request->id)->get();
 
         return response()->json([
             'status' => '200',
-            'message' => 'data..',
-            'result' => $especialidad,
+            'message' => 'Datos obtenidos con éxito',
+            'result' => $especialidad
         ]);
     }
 
-    // Guardar una especialidad
+    // Guardar una nueva especialidad
     public function save(Request $request)
     {
         $especialidad = Especialidades::create([
-            'Nombre_especialidades' => $request->Nombre_especialidades,
+            'nombre_especialidad' => $request->nombre_especialidad,     
         ]);
 
         return response()->json([
             'status' => '200',
-            'message' => 'guardado con éxito',
-            'data' => $especialidad,
+            'message' => 'Especialidad guardada con éxito',
+            'data' => $especialidad
         ]);
     }
 
-    // Actualizar una especialidad
+    // Actualizar una especialidad existente
     public function update(Request $request)
     {
         $especialidad = Especialidades::findOrFail($request->id);
 
         $especialidad->update([
-            'Nombre_especialidades' => $request->Nombre_especialidades,
+            'nombre_especialidad' => $request->nombre_especialidad,
         ]);
 
         return response()->json([
             'status' => '200',
-            'message' => 'actualizado con éxito',
+            'message' => 'Especialidad actualizada con éxito',
         ]);
     }
 
@@ -69,7 +70,7 @@ class EspecialidadesController extends Controller
 
         return response()->json([
             'status' => '200',
-            'message' => 'se eliminó con éxito',
+            'message' => 'Especialidad eliminada con éxito',
         ]);
     }
 }
